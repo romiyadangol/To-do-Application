@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import Input from "./components/Input";
-import Header from "./components/Header";
 
 export default function App() {
     const [todo, setTodo] = useState([]);
@@ -34,7 +33,7 @@ export default function App() {
         
     };
 
-    const updateTodo = (id, isCompleted) => {
+    const toggleCheckbox = (id, isCompleted) => {
         fetch(`http://localhost:8000/todo/${id}`,{
             method: 'PATCH',
             headers: {
@@ -44,15 +43,36 @@ export default function App() {
         })
         .then(res => res.json())
         .then(() => {
-            const updatedTodo = todo.map((item) => {
+            const toggleCheckbox = todo.map((item) => {
                 if (item.id === id) {
                     return { ...item, isCompleted };
                 }
                 return item;
             });
-            setTodo(updatedTodo);
+            setTodo(toggleCheckbox);
         })
     };
+
+    const updateTodo = (id, title) => {
+        fetch(`http://localhost:8000/todo/${id}1`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ title }),
+        })
+        .then((res) => res.json())
+        .then(() => {
+            const updatedTodo = todo.map((item) => {
+                if(item.id === id){
+                    return {...item,title};
+                }
+                return item;
+            });
+            setTodo(updatedTodo);
+        })
+
+    }
 
     const handleDelete = (id) => {
         fetch(`http://localhost:8000/todo/${id}`,{
@@ -78,17 +98,10 @@ export default function App() {
 
     return (
         <div className="main-container">
-            {/* <Card addTodo={addTodo}/>
+            <Card addTodo={addTodo}/>
             <Button filter={filter} setFilter={setFilter} />
-            <Input todo={filteredTodos} updateTodo={updateTodo} deleteTodo={handleDelete}/>  
-            <button className="delete-all" onClick={() => setTodo([])}>🗑</button> */}
-            
-            <Header title="Todo-App"/>
-
-            
-
-
-        
+            <Input list={filteredTodos} toggleCheckbox={toggleCheckbox} updateTodo={updateTodo} deleteTodo={handleDelete}/>  
+            <button className="delete-all" onClick={() => setTodo([])}>🗑</button>
         </div>
     );
 }

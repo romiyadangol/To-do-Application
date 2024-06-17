@@ -1,12 +1,11 @@
 // TodoForm.js
 import { useState } from 'react';
 
-const TodoForm = ({ addTodo }) => {
+function Card({ addTodo }){
   const [newTodo, setNewTodo] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (newTodo.trim() === '') return;
     addTodo(newTodo);
     setNewTodo('');
   };
@@ -24,6 +23,7 @@ const TodoForm = ({ addTodo }) => {
       </form>
     </div>
   );
-};
+}
 
-export default TodoForm;
+
+export default Card;
