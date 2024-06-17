@@ -1,0 +1,22 @@
+.button-container{
+    display: flex;
+    justify-content: center;
+    
+}
+.button-container button{
+    padding: 10px 20px;
+    margin: 0 5px;
+    background-color: rgb(243, 238, 238);
+    color: #bf19e9;
+    border: none;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 140px;
+    text-align: center;
+}
+.button-container button.active {
+    background-color: #8900b3;
+    color: white;
+}

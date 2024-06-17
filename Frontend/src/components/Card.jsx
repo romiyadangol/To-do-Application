@@ -1,5 +1,5 @@
-// TodoForm.js
 import { useState } from 'react';
+import '../assets/css/card.css';
 
 function Card({ addTodo }){
   const [newTodo, setNewTodo] = useState('');
@@ -12,14 +12,15 @@ function Card({ addTodo }){
 
   return (
     <div className="todo-form">
-      <form onSubmit={handleSubmit}>
+      <form className='form-submit' onSubmit={handleSubmit}>
         <input
+          className='input-todo'
           type="text"
           value={newTodo}
           onChange={(e) => setNewTodo(e.target.value)}
           placeholder="Add new todo"
         />
-        <button type="submit">+</button>
+        <button className='button-add' type="submit">+</button>
       </form>
     </div>
   );

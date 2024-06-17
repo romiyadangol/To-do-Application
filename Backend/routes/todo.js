@@ -14,7 +14,7 @@ router.post('/' , (req, res) => {
     const todo = req.body;
     const id = uuidv4();
     todo.id = id;
-    const createdAt =  moment().format('MMMM Do YYYY, h:mm:ss a')
+    const createdAt =  moment().format('LT'); 
     mockData.push({id, ...todo, createdAt});
     res.json({
         message : 'Todo added successfully',
@@ -28,7 +28,7 @@ router.patch('/:id', (req,res) => {
         return item.id === id;
     });
     const oldValueToBeUpdated = mockData[indexToUpdate];
-    const updatedAt = moment().format('MMMM Do YYYY, h:mm:ss a');
+    const updatedAt = moment().format('LT'); 
     mockData[indexToUpdate] = {
         ...oldValueToBeUpdated,
         ...newUpdatedValue,

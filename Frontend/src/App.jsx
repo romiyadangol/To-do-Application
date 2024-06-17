@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import Input from "./components/Input";
+import './assets/css/index.css';
 
 export default function App() {
     const [todo, setTodo] = useState([]);
@@ -98,6 +99,7 @@ export default function App() {
 
     return (
         <div className="main-container">
+            <h1>Todo List</h1>
             <Card addTodo={addTodo}/>
             <Button filter={filter} setFilter={setFilter} />
             <Input list={filteredTodos} toggleCheckbox={toggleCheckbox} updateTodo={updateTodo} deleteTodo={handleDelete}/>  
