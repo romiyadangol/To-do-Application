@@ -25,7 +25,7 @@ export default function App() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title: newTodo , isCompleted: false }),
+            body: JSON.stringify({ title: newTodo , isCompleted: false , createdAt: new Date().toISOString()}),
         })
         .then(res => res.json())
         .then((data) => {
@@ -55,7 +55,7 @@ export default function App() {
     };
 
     const updateTodo = (id, title) => {
-        fetch(`http://localhost:8000/todo/${id}1`, {
+        fetch(`http://localhost:8000/todo/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ export default function App() {
         .then(() => {
             const updatedTodo = todo.map((item) => {
                 if(item.id === id){
-                    return {...item,title};
+                    return {...item,title,createdAt: new Date().toISOString()};
                 }
                 return item;
             });

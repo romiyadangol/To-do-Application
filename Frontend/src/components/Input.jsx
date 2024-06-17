@@ -16,9 +16,9 @@ export default function Input({ list, toggleCheckbox, updateTodo, deleteTodo }) 
         setEditedId(null);
         setEditedTitle('');
     };
-    
+
     const formatTime = (inputTime) => {
-        return moment(inputTime).format('h:mm A'); 
+        return moment(inputTime, moment.ISO_8601).format('h:mm A');
     };
 
     return (
@@ -36,17 +36,18 @@ export default function Input({ list, toggleCheckbox, updateTodo, deleteTodo }) 
                     {editedId === item.id ? (
                         <>
                             <input
+                            className="edit-input"
                                 type="text"
                                 value={editedTitle}
                                 onChange={(e) => setEditedTitle(e.target.value)}
                             />
-                            <button onClick={() => handleSaveClick(item.id)}>Save</button>
+                            <button className="save-btn" onClick={() => handleSaveClick(item.id)}>📩</button>
                         </>
                     ) : (
                         <>
                             <p>{formatTime(item.createdAt)}</p>
                             <span>{item.title}</span>
-                            <button onClick={() => handleEditClick(item.id, item.title)}>Edit</button>
+                            <button className="edit-btn" onClick={() => handleEditClick(item.id, item.title)}>✏️</button>
                         </>
                     )}
                     <button className="delete" onClick={() => deleteTodo(item.id)}>X</button>

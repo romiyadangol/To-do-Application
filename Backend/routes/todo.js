@@ -4,51 +4,67 @@ const express = require('express');
 const router = express.Router();
 
 let mockData = [];
+
+// Get all todos
 router.get('/', (req, res) => {
     res.send({
-        message : 'Todo data',
-        data : mockData
+        message: 'Todo data',
+        data: mockData
     });
 });
-router.post('/' , (req, res) => {
+
+// Add a new todo
+router.post('/', (req, res) => {
     const todo = req.body;
     const id = uuidv4();
     todo.id = id;
-    const createdAt =  moment().format('LT'); 
-    mockData.push({id, ...todo, createdAt});
+    const createdAt = moment().toISOString(); 
+    mockData.push({ id, ...todo, createdAt });
     res.json({
-        message : 'Todo added successfully',
-        data : todo
-    })
+        message: 'Todo added successfully',
+        data: todo
+    });
 });
-router.patch('/:id', (req,res) => {
+
+// Update a todo
+router.patch('/:id', (req, res) => {
     const id = req.params.id;
     const newUpdatedValue = req.body;
-    let indexToUpdate = mockData.findIndex((item) => {
-        return item.id === id;
-    });
-    const oldValueToBeUpdated = mockData[indexToUpdate];
-    const updatedAt = moment().format('LT'); 
-    mockData[indexToUpdate] = {
-        ...oldValueToBeUpdated,
-        ...newUpdatedValue,
-        updatedAt
-    };
-    res.json({
-        message : 'Todo updated successfully',
-        data : mockData
-    })
+    const indexToUpdate = mockData.findIndex((item) => item.id === id);
+    if (indexToUpdate !== -1) {
+        const oldValueToBeUpdated = mockData[indexToUpdate];
+        const updatedAt = moment().toISOString(); 
+        mockData[indexToUpdate] = {
+            ...oldValueToBeUpdated,
+            ...newUpdatedValue,
+            updatedAt
+        };
+        res.json({
+            message: 'Todo updated successfully',
+            data: mockData[indexToUpdate]
+        });
+    } else {
+        res.status(404).json({
+            message: 'Todo not found'
+        });
+    }
 });
-router.delete('/:id', (req,res) => {
+
+// Delete a todo
+router.delete('/:id', (req, res) => {
     const id = req.params.id;
-    let indexToDelete = mockData.filter((item) => {
-        return item.id !== id;
-    });
-    mockData = indexToDelete;
-    res.json({
-        message : 'Todo deleted successfully',
-        data : mockData
-    })
-})
+    const updatedData = mockData.filter((item) => item.id !== id);
+    if (updatedData.length !== mockData.length) {
+        mockData = updatedData;
+        res.json({
+            message: 'Todo deleted successfully',
+            data: mockData
+        });
+    } else {
+        res.status(404).json({
+            message: 'Todo not found'
+        });
+    }
+});
 
 module.exports = router;
