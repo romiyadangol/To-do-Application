@@ -3,11 +3,7 @@ const moment = require('moment');
 const express = require('express');
 const router = express.Router();
 
-let mockData = [
-    // { id: 1, title: 'Create a todo app', completed: false },
-    // { id: 2, title: 'Create a backend server', completed: false },
-    // { id: 3, title: 'Create a frontend app', completed: false }
-];
+let mockData = [];
 router.get('/', (req, res) => {
     res.send({
         message : 'Todo data',
