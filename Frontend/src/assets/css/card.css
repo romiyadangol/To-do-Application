@@ -1,0 +1,139 @@
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+  
+.container {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    font-size: 1.1rem;
+    user-select: none;
+}
+  
+.checkmark {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: #ccc;
+    border-radius: 50%;
+    transition: 300ms;
+}
+.container input:checked ~ .checkmark {
+    background-color: #646681;
+    border-radius: .5rem;
+    animation: pulse 500ms ease-in-out;
+}
+  
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+  
+.container input:checked ~ .checkmark:after {
+    display: block;
+    width: 0.25rem; 
+}
+
+.container .checkmark:after {
+    left: 0.45em;
+    top: 0.25em;
+    width: 0.25em;
+    height: 0.5em;
+    border: solid #E0E0E2;
+    border-width: 0 0.15em 0.15em 0;
+    transform: rotate(45deg);
+}
+.strike span{
+    text-decoration: line-through;
+    color: #858383;
+}
+p{
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    color: #646681;
+}
+  
+@keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 #646681;
+      rotate: 20deg;
+    }
+  
+    50% {
+      rotate: -20deg;
+    }
+  
+    75% {
+        rotate: 10deg;
+    }
+  
+    100% {
+      box-shadow: 0 0 0 13px #646681;
+      rotate: 0;
+    }
+}
+span{
+    font-size: 1.2rem;
+    color: #0c0c0e;
+    margin-bottom: 10px;
+    width: 300px;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0;
+    margin-top: 30px;
+    
+}
+ul div{
+    display: flex;
+    justify-content: space-between;
+    width: 600px;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
+
+}
+.edit-btn{
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+
+}
+.delete{
+    cursor: pointer;
+    color: red;
+    background-color: white;
+    font-size: 1.2rem;
+    border: none;
+    margin-bottom: 10px;
+
+}
+
+.edit-input{
+  flex-grow: 1;
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.save-btn{
+    border: none;
+    cursor: pointer;
+    background-color: white;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
